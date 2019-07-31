@@ -1,0 +1,50 @@
+﻿<input type="checkbox" name="check" id="checkId" onclick="check()" />
+<table class="table">
+    <tr><th><h1>Gryffindor students</h1></th></tr>
+    <tr>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Name</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Species</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">YearOfBirth</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Actor</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">HogwartsStudent</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">House</a></th>
+
+    </tr>
+
+    
+</table>
+
+<script>
+
+    function check() {
+        var check = document.getElementById('checkId').checked;
+        if (check == true) {
+            $.ajax({
+                url: "/Home/Gryffindor",
+                type: "POST",
+                data: { id: "true" },
+                contentType: 'charset=utf-8',
+                success: function (result) {
+                    return result;
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+        else {
+            $.ajax({
+                url: "/Home/Gryffindor",
+                type: "POST",
+                data: { id: "false" },
+                contentType: 'charset=utf-8',
+                success: function (result) {
+
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+    }
+</script>

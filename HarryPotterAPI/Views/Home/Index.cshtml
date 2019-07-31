@@ -1,0 +1,290 @@
+﻿@*<input type="checkbox" name="check" id="checkId" value=" Only girl" onclick="GetGryffindor()"/>*@
+
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="Gryffindor" onclick="GetGryffindor()">Gryffindor</a>
+                        <input type="checkbox" name="check" id="check1" value=" Only girl" onclick="GetGryffindor()" />
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="Slytherin" onclick="GetSlytherin()">Slytherin</a>
+                        <input type="checkbox" name="check" id="check2" value=" Only girl" onclick="GetSlytherin()" />
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="Hufflepuff" onclick="GetHufflepuff()">Hufflepuff</a>
+                        <input type="checkbox" name="check" id="check3" value=" Only girl" onclick="GetHufflepuff()" />
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" id="Ravenclaw" onclick="GetRavenclaw()">Ravenclaw</a>
+                        <input type="checkbox" name="check" id="check4" value=" Only girl" onclick="GetRavenclaw()" />
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<table class="table" id="myTable">
+    @*<tr><th><h1>Gryffindor students</h1></th></tr>*@
+    <tr>
+        <th onclick="sortTable(0)">Name</th>
+        <th onclick="sortTable(1)">Species</th>
+        <th onclick="sortTable(2)">YearOfBirth</th>
+        <th onclick="sortTable(3)">Gender</th>
+        <th onclick="sortTable(4)">Actor</th>
+        <th onclick="sortTable(5)">House</th>
+    </tr>
+    <tbody id="studentContainer"></tbody>
+</table>
+
+
+
+<script id="template" type="text/x-jquery-tmpl">
+    <tr>
+        <td> ${name} </td>
+        <td> ${species} </td>
+        <td> ${yearOfBirth} </td>
+        <td> ${gender} </td>
+        <td> ${actor} </td>
+        <td> ${house} </td>
+    </tr>
+</script>
+
+
+<script>
+
+    $(document).ready(function () {
+        GetGryffindor();
+
+    });
+
+    function GetGryffindor() {
+        var check = document.getElementById("check1").checked;
+        SendGryffindor(check);
+    };
+
+    function GetSlytherin() {
+        var check = document.getElementById("check2").checked;
+        SendSlytherin(check);
+    };
+
+    function GetHufflepuff() {
+        var check = document.getElementById("check3").checked;
+        SendHufflepuff(check);
+    };
+
+    function GetRavenclaw() {
+        var check = document.getElementById("check4").checked;
+        SendRavenclaw(check);
+    };
+
+    function SendGryffindor(check) {
+        
+        $.ajax({
+            url: "/Home/Gryffindor",
+            type: "POST",
+            data: { "id": check },
+            success: function (result) {
+                SetData(result);
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+
+    };
+
+    function SendSlytherin(check) {
+        //alert(3);
+
+        $.ajax({
+            url: "/Home/Slytherin",
+            type: "POST",
+            data: { "id": check },
+            success: function (result) {
+                SetData(result);
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+
+    };
+
+    function SendHufflepuff(check) {
+        //alert(3);
+
+        $.ajax({
+            url: "/Home/Hufflepuff",
+            type: "POST",
+            data: { "id": check },
+            success: function (result) {
+                SetData(result);
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+
+    };
+
+    function SendRavenclaw(check) {
+        $.ajax({
+            url: "/Home/Ravenclaw",
+            type: "POST",
+            data: { "id": check },
+            success: function (result) {
+                SetData(result);
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+
+    };
+
+
+
+    //var dataLocal =
+    //    [
+    //        {
+    //            "name": "Harry Potter",
+    //            "species": "human",
+    //            "gender": "male",
+    //            "house": "Gryffindor",
+    //            "yearOfBirth": 1980,
+    //            "ancestry": "half-blood",
+    //            "eyeColour": "green",
+    //            "hairColour": "black",
+    //            "wands": null,
+    //            "patronus": "stag",
+    //            "hogwartsStudent": true,
+    //            "hogwartsStaff": false,
+    //            "actor": "Daniel Radcliffe",
+    //            "alive": true,
+    //            "image": "http://hp-api.herokuapp.com/images/harry.jpg"
+    //        },
+    //        {
+    //            "name": "Hermione Granger",
+    //            "species": "human",
+    //            "gender": "female",
+    //            "house": "Gryffindor",
+    //            "yearOfBirth": 1979,
+    //            "ancestry": "muggleborn",
+    //            "eyeColour": "brown",
+    //            "hairColour": "brown",
+    //            "wands": null,
+    //            "patronus": "otter",
+    //            "hogwartsStudent": true,
+    //            "hogwartsStaff": false,
+    //            "actor": "Emma Watson",
+    //            "alive": true,
+    //            "image": "http://hp-api.herokuapp.com/images/hermione.jpeg"
+    //        }
+    //    ]
+
+    //var dataLocal2 =
+    //    [
+    //        {
+    //            "name": "Harry Potter",
+    //            "species": "human",
+    //            "yearOfBirth": 1980,
+    //            "gender": "male",
+    //            "actor": "Daniel Radcliffe",
+    //            "house": "Gryffindor"
+    //        },
+    //        {
+    //            "name": "Hermione Granger",
+    //            "species": "human",
+    //            "yearOfBirth": 1979,
+    //            "gender": "female",
+    //            "actor": "Emma Watson",
+    //            "house": "Gryffindor"
+    //        }
+    //    ]
+
+
+    /////////////////
+
+
+
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    //Set the sorting direction to ascending:
+    dir = "asc"; 
+    /*Make a loop that will continue until
+    no switching has been done:*/
+    while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+        //start by saying there should be no switching:
+        shouldSwitch = false;
+        /*Get the two elements you want to compare,
+        one from current row and one from the next:*/
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        /*check if the two rows should switch place,
+        based on the direction, asc or desc:*/
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch= true;
+                break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    //if so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+    }
+    if (shouldSwitch) {
+        /*If a switch has been marked, make the switch
+        and mark that a switch has been done:*/
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        //Each time a switch is done, increase this count by 1:
+        switchcount ++;      
+    } else {
+        /*If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again.*/
+        if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+        }
+        }
+    }
+}    
+
+
+
+    function SetData(data) {
+
+        console.log(data);
+
+        ////set data to element table
+        //window.geemails = [];
+        $("#studentContainer").empty();
+        $("#template").tmpl(data).appendTo("#studentContainer");
+
+    };
+
+
+
+</script>
+
+
+
+

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<HarryPotterAPI.Models.Character>
+
+<input type="checkbox" name="check" id="checkId" onclick="checkB()" />
+<table class="table">
+    <tr><th><h1>Ravenclaw students</h1></th></tr>
+    <tr>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Name</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Species</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">YearOfBirth</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Actor</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">HogwartsStudent</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">House</a></th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        @if (item.House == "Ravenclaw")
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Species</td>
+                <td>@item.YearOfBirth</td>
+                <td>@item.Actor</td>
+                <td>@item.HogwartsStudent</td>
+                <td>@item.House</td>
+            </tr>
+        }
+
+    }
+</table>
+
+<script>
+    function checkB() {
+        var check = document.getElementById('checkId');
+        if (check.checked) {
+            $.ajax({
+                url: "/Home/Ravenclaw",
+                type: "POST",
+                contentType: 'charset=utf-8',
+                success: function (result) {
+                    alert(1)
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+    }
+</script>
+

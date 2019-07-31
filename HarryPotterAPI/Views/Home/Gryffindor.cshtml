@@ -1,0 +1,67 @@
+﻿@model IEnumerable<HarryPotterAPI.Models.Character>
+
+<input type="checkbox" name="check" id="checkId" onclick="check()" />
+<table class="table">
+    <tr><th><h1>Gryffindor students</h1></th></tr>
+    <tr>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Name</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Species</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">YearOfBirth</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">Actor</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">HogwartsStudent</a></th>
+        <th><a asp-area="" asp-controller="Home" asp-action="Gryffindor">House</a></th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        @if (item.House == "Gryffindor")
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Species</td>
+                <td>@item.YearOfBirth</td>
+                <td>@item.Actor</td>
+                <td>@item.HogwartsStudent</td>
+                <td>@item.House</td>
+            </tr>
+        }
+
+    }
+</table>
+
+<script>
+
+        function check() {
+            var check = document.getElementById('checkId').checked;
+            if (check == true) {
+                $.ajax({
+                    url: "/Home/Gryffindor",
+                    type: "POST",
+                    data: { id : "true"},
+                    contentType: 'charset=utf-8',
+                    success: function (result) {
+                        return result;
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/Home/Gryffindor",
+                    type: "POST",
+                    data: { id : "false"},
+                    contentType: 'charset=utf-8',
+                    success: function (result) {
+                        
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+            }
+        }
+</script>
+
