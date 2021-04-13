@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HarryPotterAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using HarryPotterAPI.Models;
 
 namespace HarryPotterAPI.Controllers
 {
@@ -136,11 +133,6 @@ namespace HarryPotterAPI.Controllers
 
             return Json(result);
         }
-
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
