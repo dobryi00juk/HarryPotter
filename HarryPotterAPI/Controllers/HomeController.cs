@@ -29,7 +29,6 @@ namespace HarryPotterAPI.Controllers
                 var result = response;
                 return Json(result);
             }
-
         }
 
         public IActionResult SortSlytherin(bool sort)
@@ -46,7 +45,6 @@ namespace HarryPotterAPI.Controllers
                 var result = response;
                 return Json(result);
             }
-
         }
 
         public IActionResult SortHufflepuff(bool sort)
@@ -63,7 +61,6 @@ namespace HarryPotterAPI.Controllers
                 var result = response;
                 return Json(result);
             }
-
         }
 
         public IActionResult SortRavenclaw(bool sort)
@@ -80,7 +77,6 @@ namespace HarryPotterAPI.Controllers
                 var result = response;
                 return Json(result);
             }
-
         }
 
         public IActionResult Gryffindor(bool id)
@@ -88,14 +84,12 @@ namespace HarryPotterAPI.Controllers
             var request = new Generator();
             var response = request.RetrieveGryffindors();
 
-
-            var result = id 
+            var result = id
                 ? response.Where(n => n.House == "Gryffindor" && n.Gender == "female")
                 : response.Where(n => n.House == "Gryffindor")
             ;
-            
-            return Json(result);
 
+            return Json(result);
         }
 
         public IActionResult Slytherin(bool id)
@@ -104,7 +98,6 @@ namespace HarryPotterAPI.Controllers
 
             var request = new Generator();
             var response = request.RetrieveSlytherins();
-
 
             var result = id
                 ? response.Where(n => n.House == "Slytherin" && n.Gender == "female")
@@ -121,7 +114,6 @@ namespace HarryPotterAPI.Controllers
             var request = new Generator();
             var response = request.RetrieveHufflepuffs();
 
-
             var result = id
                 ? response.Where(n => n.House == "Hufflepuff" && n.Gender == "female")
                 : response.Where(n => n.House == "Hufflepuff")
@@ -137,14 +129,14 @@ namespace HarryPotterAPI.Controllers
             var request = new Generator();
             var response = request.RetrieveRavenclaws();
 
-
             var result = id
-                ? response.Where(n => n.House == "Ravenclaw" && n.Gender == "female")
+                ? response.Where(n => n.House == "Ravenclaw" && n.Gender == "female123123")
                 : response.Where(n => n.House == "Ravenclaw")
             ;
 
             return Json(result);
         }
+
         //public IActionResult Privacy()
         //{
         //    return View();
