@@ -10,6 +10,5 @@ namespace HarryPotterAPI.Models
 		public int Prop_1 { get; set; }
 		public int Prop_2 { get; set; }
 		public int Prop_3 { get; set; }
-
 	}
 }
